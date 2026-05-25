@@ -27,7 +27,7 @@ FROM php-base AS vendor
 COPY composer.json composer.lock ./
 COPY artisan bootstrap/ ./
 ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress --no-scripts
 
 FROM php-base AS app
 
@@ -41,6 +41,13 @@ COPY docker/start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh \
     && mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
+
+# Allow composer as superuser during app-stage post-install steps
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Ensure autoload & package discovery run after vendor and app files are present
+RUN composer dump-autoload --optimize --no-interaction --classmap-authoritative || true \
+    && php artisan package:discover --ansi || true
 
 EXPOSE 10000
 
