@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use App\Models\User;
+
+class CheckTeacherRole
+{
+    public function handle(Request $request, Closure $next)
+    {
+        $userId = session('user_id');
+
+        if (!$userId) {
+            return redirect()->route('login')->with('error', 'Please login first.');
+        }
+
+        $user = User::query()->find($userId);
+
+        if (!$user || ($user->role !== 'teacher' && $user->role !== 'admin')) {
+            return redirect()->route('login')->with('error', 'Unauthorized access.');
+        }
+
+        return $next($request);
+    }
+}
