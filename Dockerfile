@@ -25,6 +25,8 @@ RUN npm run build
 FROM php-base AS vendor
 
 COPY composer.json composer.lock ./
+COPY artisan bootstrap/ ./
+ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress
 
 FROM php-base AS app
