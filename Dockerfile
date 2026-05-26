@@ -46,9 +46,12 @@ RUN chmod +x /usr/local/bin/start.sh \
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Ensure autoload & package discovery run after vendor and app files are present
-RUN composer dump-autoload --optimize --no-interaction --classmap-authoritative || true \
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress || true \
+    && composer dump-autoload --optimize --no-interaction --classmap-authoritative || true \
     && php artisan package:discover --ansi || true
 
 EXPOSE 10000
 
-CMD ["/usr/local/bin/start.sh"]
+# CMD php artisan serve --host=0.0.0.0 --port=$PORT
+CMD ["sh", "-c", "php artisan migrate --force && exec php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"]
+
