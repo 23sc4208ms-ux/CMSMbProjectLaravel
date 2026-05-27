@@ -36,12 +36,12 @@
 
     <div class="container">
         <nav class="nav">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('students.index') }}">Students</a>
-            <a href="{{ route('degrees.index') }}" class="active">Degrees</a>
-            <a href="{{ route('activity-logs.index') }}">Activity Logs</a>
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <a href="{{ route('about-us') }}">About Us</a>
+            <a href="{{ route('home', [], false) }}">Home</a>
+            <a href="{{ route('students.index', [], false) }}">Students</a>
+            <a href="{{ route('degrees.index', [], false) }}" class="active">Degrees</a>
+            <a href="{{ route('activity-logs.index', [], false) }}">Activity Logs</a>
+            <a href="{{ route('dashboard', [], false) }}">Dashboard</a>
+            <a href="{{ route('about-us', [], false) }}">About Us</a>
         </nav>
 
         <h1>Degree Management</h1>
@@ -82,8 +82,8 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $degree->code }}</td>
                         <td>
-                            <a href="{{ route('degrees.show', $degree) }}" class="btn small secondary">View</a>
-                            <a href="{{ route('degrees.edit', $degree) }}" class="btn small">Edit</a>
+                            <a href="{{ route('degrees.show', [$degree], false) }}" class="btn small secondary">View</a>
+                            <a href="{{ route('degrees.edit', [$degree], false) }}" class="btn small">Edit</a>
                             <form action="{{ route('degrees.destroy', [$degree], false) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Delete this degree?');">
                                 @csrf
                                 @method('DELETE')
