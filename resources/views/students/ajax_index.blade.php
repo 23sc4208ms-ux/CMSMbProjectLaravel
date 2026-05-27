@@ -30,7 +30,7 @@
         <h1>Student Management (AJAX)</h1>
         <div class="controls">
             <button id="btnAdd" class="btn">Add Student</button>
-            <a href="{{ route('students.index') }}" class="btn">Non-AJAX List</a>
+            <a href="{{ route('students.index', [], false) }}" class="btn">Non-AJAX List</a>
         </div>
 
         <div id="messages"></div>

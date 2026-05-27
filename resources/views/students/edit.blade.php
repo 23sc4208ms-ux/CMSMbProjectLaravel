@@ -24,17 +24,17 @@
 
     <div class="container">
         <nav class="nav">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('students.index') }}" class="active">Students</a>
-            <a href="{{ route('degrees.index') }}">Degrees</a>
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <a href="{{ route('about-us') }}">About Us</a>
+            <a href="{{ route('home', [], false) }}">Home</a>
+            <a href="{{ route('students.index', [], false) }}" class="active">Students</a>
+            <a href="{{ route('degrees.index', [], false) }}">Degrees</a>
+            <a href="{{ route('dashboard', [], false) }}">Dashboard</a>
+            <a href="{{ route('about-us', [], false) }}">About Us</a>
         </nav>
 
         <h1>Edit Student</h1>
 
         @include('students._form', [
-            'action' => route('students.update', $student),
+            'action' => route('students.update', [$student], false),
             'method' => 'PUT',
             'submitLabel' => 'Update Student',
             'student' => $student,

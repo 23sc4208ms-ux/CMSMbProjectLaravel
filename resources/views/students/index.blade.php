@@ -26,12 +26,12 @@
 
     <div class="container">
         <nav class="nav">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('students.index') }}" class="active">Students</a>
-            <a href="{{ route('degrees.index') }}">Degrees</a>
-            <a href="{{ route('activity-logs.index') }}">Activity Logs</a>
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <a href="{{ route('about-us') }}">About Us</a>
+            <a href="{{ route('home', [], false) }}">Home</a>
+            <a href="{{ route('students.index', [], false) }}" class="active">Students</a>
+            <a href="{{ route('degrees.index', [], false) }}">Degrees</a>
+            <a href="{{ route('activity-logs.index', [], false) }}">Activity Logs</a>
+            <a href="{{ route('dashboard', [], false) }}">Dashboard</a>
+            <a href="{{ route('about-us', [], false) }}">About Us</a>
         </nav>
 
         <h1>Student Management</h1>
@@ -40,7 +40,7 @@
             <div class="alert">{{ session('success') }}</div>
         @endif
 
-        <a href="{{ route('students.create') }}" class="btn">Add New Student</a>
+        <a href="{{ route('students.create', [], false) }}" class="btn">Add New Student</a>
 
         <table>
             <thead>
@@ -61,8 +61,8 @@
                         <td>{{ $student->degree_title }}</td>
                         <td>
                             <div class="actions">
-                                <a href="{{ route('students.show', $student) }}" class="btn secondary">View</a>
-                                <a href="{{ route('students.edit', $student) }}" class="btn secondary">Edit</a>
+                                <a href="{{ route('students.show', [$student], false) }}" class="btn secondary">View</a>
+                                <a href="{{ route('students.edit', [$student], false) }}" class="btn secondary">Edit</a>
 
                                 <form action="{{ route('students.destroy', [$student], false) }}" method="POST" onsubmit="return confirm('Delete this student?');">
                                     @csrf

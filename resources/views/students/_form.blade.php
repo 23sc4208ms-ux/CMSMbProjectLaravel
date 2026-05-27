@@ -94,6 +94,6 @@
 
     <div class="actions">
         <button type="submit" class="btn" formnovalidate>{{ $submitLabel }}</button>
-        <a href="{{ route('students.index') }}" class="btn secondary">Back</a>
+        <a href="{{ route('students.index', [], false) }}" class="btn secondary">Back</a>
     </div>
 </form>
