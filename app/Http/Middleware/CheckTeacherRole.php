@@ -13,13 +13,13 @@ class CheckTeacherRole
         $userId = session('user_id');
 
         if (!$userId) {
-            return redirect()->route('login')->with('error', 'Please login first.');
+            return redirect('/login')->with('error', 'Please login first.');
         }
 
         $user = User::query()->find($userId);
 
         if (!$user || ($user->role !== 'teacher' && $user->role !== 'admin')) {
-            return redirect()->route('login')->with('error', 'Unauthorized access.');
+            return redirect('/login')->with('error', 'Unauthorized access.');
         }
 
         return $next($request);

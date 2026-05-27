@@ -11,7 +11,7 @@ class CheckRole
     {
         // If user is not logged in, redirect to login page with message
         if (!session()->has('user_id')) {
-            return redirect()->route('login')->with('error', 'Please login first.');
+            return redirect('/login')->with('error', 'Please login first.');
         }
 
         // If roles were provided, ensure the user has one of them
@@ -20,7 +20,7 @@ class CheckRole
             $allowed = array_map(fn($r) => strtolower((string) $r), $roles);
 
             if (!in_array($userRole, $allowed, true)) {
-                return redirect()->route('login')->with('error', 'Unauthorized access.');
+                return redirect('/login')->with('error', 'Unauthorized access.');
             }
         }
 

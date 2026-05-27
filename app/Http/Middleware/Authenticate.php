@@ -11,7 +11,7 @@ class Authenticate
     {
         // Check if user is logged in via session
         if (!session()->has('user_id')) {
-            return redirect()->route('login')->with('error', 'Please login first.');
+            return redirect('/login')->with('error', 'Please login first.');
         }
 
         return $next($request);

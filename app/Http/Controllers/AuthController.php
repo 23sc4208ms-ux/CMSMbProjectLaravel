@@ -131,26 +131,27 @@ class AuthController extends Controller
 
         // Login successful - store user in session
         session(['user_id' => $user->id, 'user_email' => $user->email, 'user_name' => $user->name, 'user_role' => $user->role]);
+        session()->save();
 
         // Check if user needs to change password
         if ($user->force_password_change) {
-            $redirectUrl = route('password.change');
+            $redirectUrl = '/change-password';
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => true,
                     'redirect_url' => $redirectUrl,
                 ], 200);
             }
-            return redirect()->route('password.change');
+            return redirect($redirectUrl);
         }
 
         // Determine redirect URL based on user role
         if ($user->role === 'admin') {
-            $redirectUrl = route('dashboard.admin');
+            $redirectUrl = '/dashboard/admin';
         } elseif ($user->role === 'teacher') {
-            $redirectUrl = route('dashboard.teacher');
+            $redirectUrl = '/dashboard/teacher';
         } else {
-            $redirectUrl = route('dashboard.student');
+            $redirectUrl = '/dashboard/student';
         }
 
         // Return JSON for AJAX requests
@@ -163,11 +164,11 @@ class AuthController extends Controller
 
         // Redirect for traditional form submission
         if ($user->role === 'admin') {
-            return redirect()->route('dashboard.admin')->with('success', 'Welcome Admin!');
+            return redirect($redirectUrl)->with('success', 'Welcome Admin!');
         } elseif ($user->role === 'teacher') {
-            return redirect()->route('dashboard.teacher')->with('success', 'Welcome Teacher!');
+            return redirect($redirectUrl)->with('success', 'Welcome Teacher!');
         } else {
-            return redirect()->route('dashboard.student')->with('success', 'Welcome Student!');
+            return redirect($redirectUrl)->with('success', 'Welcome Student!');
         }
     }
 

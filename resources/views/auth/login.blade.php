@@ -149,7 +149,7 @@
         <div id="errorContainer"></div>
         <div id="countdownContainer"></div>
 
-        <form id="loginForm">
+        <form id="loginForm" method="POST" action="{{ route('login.submit') }}">
             @csrf
 
             <div class="form-group">
@@ -178,97 +178,88 @@
         </form>
 
         <div class="footer">
-            <a href="{{ route('home') }}">Back to Home</a>
+            <a href="/">Back to Home</a>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('loginForm');
+            const loginBtn = document.getElementById('loginBtn');
+            const errorContainer = document.getElementById('errorContainer');
+            const countdownContainer = document.getElementById('countdownContainer');
+
             let lockoutInterval = null;
 
-            // Handle form submission with AJAX
-            $('#loginForm').on('submit', function(e) {
-                e.preventDefault();
-
-                const username = $('#username').val();
-                const password = $('#password').val();
-                const token = $('input[name="_token"]').val();
-
-                // Disable button during submission
-                $('#loginBtn').prop('disabled', true).text('Logging in...');
-
-                $.ajax({
-                    url: "{{ route('login.submit') }}",
-                    type: 'POST',
-                    data: {
-                        _token: token,
-                        username: username,
-                        password: password
-                    },
-                    success: function(response) {
-                        // Redirect on successful login
-                        window.location.href = response.redirect_url;
-                    },
-                    error: function(xhr) {
-                        $('#loginBtn').prop('disabled', false).text('Login');
-
-                        const response = xhr.responseJSON;
-
-                        if (response.locked) {
-                            // Show lockout message
-                            showLockoutCountdown(response.remaining_seconds);
-                        } else {
-                            // Show error message
-                            $('#errorContainer').html(
-                                '<div class="error-message">' + response.message + '</div>'
-                            );
-                        }
-                    }
-                });
-            });
-
-            // Display lockout countdown
             function showLockoutCountdown(seconds) {
                 let remaining = seconds;
 
-                $('#errorContainer').html(
-                    '<div class="error-message">Account locked due to too many failed login attempts</div>'
-                );
-
-                $('#countdownContainer').html(
+                errorContainer.innerHTML = '<div class="error-message">Account locked due to too many failed login attempts</div>';
+                countdownContainer.innerHTML =
                     '<div class="countdown-timer">' +
                     '<div class="timer-label">Account Locked - Time Remaining:</div>' +
                     '<div class="timer-display" id="countdown">' + remaining + '</div>' +
                     '<div class="timer-unit">seconds</div>' +
-                    '</div>'
-                );
+                    '</div>';
 
-                // Disable form
-                $('#email').prop('disabled', true);
-                $('#password').prop('disabled', true);
-                $('#loginBtn').prop('disabled', true);
+                document.getElementById('username').disabled = true;
+                document.getElementById('password').disabled = true;
+                loginBtn.disabled = true;
 
-                // Update countdown every second
-                lockoutInterval = setInterval(function() {
+                lockoutInterval = setInterval(function () {
                     remaining--;
-                    $('#countdown').text(remaining);
+                    const countdown = document.getElementById('countdown');
+                    if (countdown) countdown.textContent = remaining;
 
                     if (remaining <= 0) {
                         clearInterval(lockoutInterval);
-                        // Re-enable form
-                        $('#email').prop('disabled', false);
-                        $('#password').prop('disabled', false);
-                        $('#loginBtn').prop('disabled', false);
+                        document.getElementById('username').disabled = false;
+                        document.getElementById('password').disabled = false;
+                        loginBtn.disabled = false;
 
-                        $('#countdownContainer').html(
-                            '<div style="padding: 15px; background: #d4edda; border: 2px solid #4caf50; border-radius: 8px; color: #155724; text-align: center; margin-bottom: 20px;">Account Unlocked! You can try again.</div>'
-                        );
+                        countdownContainer.innerHTML =
+                            '<div style="padding: 15px; background: #d4edda; border: 2px solid #4caf50; border-radius: 8px; color: #155724; text-align: center; margin-bottom: 20px;">Account Unlocked! You can try again.</div>';
                     }
                 }, 1000);
             }
 
-            // Check if locked on page load
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                errorContainer.innerHTML = '';
+                loginBtn.disabled = true;
+                loginBtn.textContent = 'Logging in...';
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json',
+                        },
+                        body: new FormData(form),
+                    });
+
+                    const data = await response.json().catch(() => ({}));
+
+                    if (response.ok && data.redirect_url) {
+                        window.location.href = data.redirect_url;
+                        return;
+                    }
+
+                    if (data.locked) {
+                        showLockoutCountdown(data.remaining_seconds || 60);
+                    } else {
+                        errorContainer.innerHTML = '<div class="error-message">' + (data.message || 'Login failed.') + '</div>';
+                    }
+                } catch (error) {
+                    errorContainer.innerHTML = '<div class="error-message">Network error. Please try again.</div>';
+                } finally {
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Login';
+                }
+            });
+
             @if (session('locked'))
                 showLockoutCountdown({{ session('remaining_seconds', 0) }});
             @endif
