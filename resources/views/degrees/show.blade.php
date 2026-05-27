@@ -33,9 +33,10 @@
         <nav class="nav">
             <a href="{{ route('home', [], false) }}">Home</a>
             <a href="{{ route('students.index', [], false) }}">Students</a>
-            <a href="{{ route('degrees.index') }}" class="active">Degrees</a>
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <a href="{{ route('about-us') }}">About Us</a>
+            <a href="{{ route('degrees.index', [], false) }}" class="active">Degrees</a>
+            <a href="{{ route('dashboard', [], false) }}">Dashboard</a>
+            <a href="{{ route('about-us', [], false) }}">About Us</a>
+            <a href="{{ route('logout', [], false) }}">Logout</a>
         </nav>
 
         <h1>View Degree</h1>

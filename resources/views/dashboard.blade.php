@@ -24,6 +24,7 @@
             <a href="{{ route('degrees.index', [], false) }}">Degrees</a>
             <a href="{{ route('dashboard', [], false) }}" class="active">Dashboard</a>
             <a href="{{ route('about-us', [], false) }}">About Us</a>
+            <a href="{{ route('logout', [], false) }}">Logout</a>
         </nav>
 
         <h1>Dashboard</h1>

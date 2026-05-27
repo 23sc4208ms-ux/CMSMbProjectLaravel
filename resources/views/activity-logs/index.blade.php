@@ -32,6 +32,7 @@
             <a href="{{ route('activity-logs.index', [], false) }}" class="active">Activity Logs</a>
             <a href="{{ route('dashboard', [], false) }}">Dashboard</a>
             <a href="{{ route('about-us', [], false) }}">About Us</a>
+            <a href="{{ route('logout', [], false) }}">Logout</a>
         </nav>
 
         <h1>Activity Logs</h1>
