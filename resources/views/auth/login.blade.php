@@ -174,6 +174,7 @@
                     id="username"
                     name="username"
                     placeholder="Enter your username or email"
+                    autocomplete="off"
                     required
                 >
             </div>
@@ -185,6 +186,7 @@
                     id="password"
                     name="password"
                     placeholder="Enter your password"
+                    autocomplete="off"
                     required
                 >
             </div>
