@@ -144,7 +144,6 @@
 <body>
     <div class="container">
         <h1>Login</h1>
-        <div class="message">Please login first</div>
 
         <div id="errorContainer">
             @if (session('error'))
