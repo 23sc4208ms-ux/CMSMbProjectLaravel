@@ -137,7 +137,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('teacher.store-annotation', $teacher->id) }}" method="POST">
+            <form action="{{ route('teacher.store-annotation', [$teacher->id], false) }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="annotation">Note Content</label>

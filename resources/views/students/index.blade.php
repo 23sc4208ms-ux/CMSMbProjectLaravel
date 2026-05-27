@@ -64,7 +64,7 @@
                                 <a href="{{ route('students.show', $student) }}" class="btn secondary">View</a>
                                 <a href="{{ route('students.edit', $student) }}" class="btn secondary">Edit</a>
 
-                                <form action="{{ route('students.destroy', $student) }}" method="POST" onsubmit="return confirm('Delete this student?');">
+                                <form action="{{ route('students.destroy', [$student], false) }}" method="POST" onsubmit="return confirm('Delete this student?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn">Delete</button>

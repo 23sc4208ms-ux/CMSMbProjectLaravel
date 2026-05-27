@@ -19,11 +19,11 @@
 
     <div class="container">
         <nav class="nav">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('students.index') }}">Students</a>
-            <a href="{{ route('degrees.index') }}">Degrees</a>
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <a href="{{ route('about-us') }}" class="active">About Us</a>
+            <a href="{{ route('home', [], false) }}">Home</a>
+            <a href="{{ route('students.index', [], false) }}">Students</a>
+            <a href="{{ route('degrees.index', [], false) }}">Degrees</a>
+            <a href="{{ route('dashboard', [], false) }}">Dashboard</a>
+            <a href="{{ route('about-us', [], false) }}" class="active">About Us</a>
         </nav>
 
         <h1>About Us</h1>

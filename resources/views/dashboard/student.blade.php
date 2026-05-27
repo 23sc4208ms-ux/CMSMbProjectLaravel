@@ -123,8 +123,8 @@
         <div class="header">
             <h1>Student Dashboard</h1>
             <div style="display:flex; align-items:center; gap:8px;">
-                <a href="{{ route('activity-logs.index') }}" class="nav-item">Activity Log</a>
-                <a href="{{ route('logout') }}" class="logout-btn">Logout</a>
+                <a href="{{ route('activity-logs.index', [], false) }}" class="nav-item">Activity Log</a>
+                <a href="{{ route('logout', [], false) }}" class="logout-btn">Logout</a>
             </div>
         </div>
 

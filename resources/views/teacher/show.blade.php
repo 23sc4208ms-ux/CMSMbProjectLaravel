@@ -175,7 +175,7 @@
     <div class="container">
         <div class="header">
             <h1>{{ $teacher->name }}</h1>
-            <a href="{{ route('teacher.index') }}">← Back</a>
+            <a href="{{ route('teacher.index', [], false) }}">← Back</a>
         </div>
 
         @if (session('success'))
@@ -201,9 +201,9 @@
             </div>
 
             <div class="button-group">
-                <a href="{{ route('teacher.edit', $teacher->id) }}" class="edit-btn">✏️ Edit</a>
-                <a href="{{ route('teacher.annotate', $teacher->id) }}" class="note-btn">📝 Add Note</a>
-                <a href="{{ route('teacher.index') }}" class="back-btn">← Back to List</a>
+                <a href="{{ route('teacher.edit', [$teacher->id], false) }}" class="edit-btn">✏️ Edit</a>
+                <a href="{{ route('teacher.annotate', [$teacher->id], false) }}" class="note-btn">📝 Add Note</a>
+                <a href="{{ route('teacher.index', [], false) }}" class="back-btn">← Back to List</a>
             </div>
         </div>
 
@@ -219,7 +219,7 @@
                     </div>
                 @endforeach
             @else
-                <div class="no-notes">No notes added yet. <a href="{{ route('teacher.annotate', $teacher->id) }}" style="color: #667eea; text-decoration: none;">Add one now →</a></div>
+                <div class="no-notes">No notes added yet. <a href="{{ route('teacher.annotate', [$teacher->id], false) }}" style="color: #667eea; text-decoration: none;">Add one now →</a></div>
             @endif
         </div>
     </div>

@@ -54,7 +54,7 @@
             <div class="alert error">{{ session('error') }}</div>
         @endif
 
-        <form action="{{ route('degrees.store') }}" method="POST">
+        <form action="{{ route('degrees.store', [], false) }}" method="POST">
             @csrf
 
             <div class="grid">
@@ -84,7 +84,7 @@
                         <td>
                             <a href="{{ route('degrees.show', $degree) }}" class="btn small secondary">View</a>
                             <a href="{{ route('degrees.edit', $degree) }}" class="btn small">Edit</a>
-                            <form action="{{ route('degrees.destroy', $degree) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Delete this degree?');">
+                            <form action="{{ route('degrees.destroy', [$degree], false) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Delete this degree?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn small danger">Delete</button>

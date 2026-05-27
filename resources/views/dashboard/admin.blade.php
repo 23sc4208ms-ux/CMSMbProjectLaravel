@@ -126,7 +126,7 @@
     <div class="container">
         <div class="header">
             <h1>Admin Dashboard</h1>
-            <a href="{{ route('logout') }}" class="logout-btn">Logout</a>
+            <a href="{{ route('logout', [], false) }}" class="logout-btn">Logout</a>
         </div>
 
         @if ($message = Session::get('success'))
@@ -149,23 +149,23 @@
         <div class="actions">
             <div class="action-card">
                 <h3>👨‍🏫 Add Teacher</h3>
-                <a href="{{ route('teacher.create') }}">Add New Teacher</a>
+                <a href="{{ route('teacher.create', [], false) }}">Add New Teacher</a>
             </div>
             <div class="action-card">
                 <h3>👨‍🎓 Add Student</h3>
-                <a href="{{ route('students.create') }}">Add New Student</a>
+                <a href="{{ route('students.create', [], false) }}">Add New Student</a>
             </div>
             <div class="action-card">
                 <h3>📊 View Teachers</h3>
-                <a href="{{ route('teacher.index') }}">View All Teachers</a>
+                <a href="{{ route('teacher.index', [], false) }}">View All Teachers</a>
             </div>
             <div class="action-card">
                 <h3>📋 View Students</h3>
-                <a href="{{ route('students.index') }}">View All Students</a>
+                <a href="{{ route('students.index', [], false) }}">View All Students</a>
             </div>
             <div class="action-card">
                 <h3>🎓 Degrees</h3>
-                <a href="{{ route('degrees.index') }}">Go to Degrees</a>
+                <a href="{{ route('degrees.index', [], false) }}">Go to Degrees</a>
             </div>
         </div>
     </div>

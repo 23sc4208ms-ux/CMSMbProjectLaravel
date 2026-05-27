@@ -124,7 +124,7 @@
             </div>
         @endif
 
-        <form action="{{ route('password.update') }}" method="POST">
+        <form action="{{ route('password.update', [], false) }}" method="POST">
             @csrf
 
             <div class="form-group">
@@ -177,7 +177,7 @@
         </div>
 
         <div class="logout-link">
-            <a href="{{ route('logout') }}">Logout</a>
+            <a href="{{ route('logout', [], false) }}">Logout</a>
         </div>
     </div>
 </body>

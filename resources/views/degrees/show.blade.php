@@ -31,8 +31,8 @@
 
     <div class="container">
         <nav class="nav">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('students.index') }}">Students</a>
+            <a href="{{ route('home', [], false) }}">Home</a>
+            <a href="{{ route('students.index', [], false) }}">Students</a>
             <a href="{{ route('degrees.index') }}" class="active">Degrees</a>
             <a href="{{ route('dashboard') }}">Dashboard</a>
             <a href="{{ route('about-us') }}">About Us</a>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="actions">
-            <form action="{{ route('degrees.destroy', $degree) }}" method="POST" onsubmit="return confirm('Delete this degree?');">
+            <form action="{{ route('degrees.destroy', [$degree], false) }}" method="POST" onsubmit="return confirm('Delete this degree?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn danger">Delete</button>

@@ -24,16 +24,16 @@
 
     <div class="container">
         <nav class="nav">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('students.index') }}">Students</a>
-            <a href="{{ route('degrees.index') }}" class="active">Degrees</a>
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <a href="{{ route('about-us') }}">About Us</a>
+            <a href="{{ route('home', [], false) }}">Home</a>
+            <a href="{{ route('students.index', [], false) }}">Students</a>
+            <a href="{{ route('degrees.index', [], false) }}" class="active">Degrees</a>
+            <a href="{{ route('dashboard', [], false) }}">Dashboard</a>
+            <a href="{{ route('about-us', [], false) }}">About Us</a>
         </nav>
 
         <h1>Edit Degree</h1>
 
-        <form action="{{ route('degrees.update', $degree) }}" method="POST" onsubmit="return confirm('Save changes to this degree?');">
+        <form action="{{ route('degrees.update', [$degree], false) }}" method="POST" onsubmit="return confirm('Save changes to this degree?');">
             @csrf
             @method('PUT')
 
@@ -45,7 +45,7 @@
 
             <div class="actions">
                 <button type="submit" class="btn">Update Degree</button>
-                <a href="{{ route('degrees.index') }}" class="btn secondary">Cancel</a>
+                <a href="{{ route('degrees.index', [], false) }}" class="btn secondary">Cancel</a>
             </div>
         </form>
     </div>

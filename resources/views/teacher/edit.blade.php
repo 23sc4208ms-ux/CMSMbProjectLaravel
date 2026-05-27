@@ -138,7 +138,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('teacher.update', $teacher->id) }}">
+        <form method="POST" action="{{ route('teacher.update', [$teacher->id], false) }}">
             @csrf
             @method('PUT')
 

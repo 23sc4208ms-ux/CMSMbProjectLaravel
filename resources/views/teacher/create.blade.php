@@ -138,7 +138,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('teacher.store') }}">
+        <form method="POST" action="{{ route('teacher.store', [], false) }}">
             @csrf
 
             <div class="form-group">

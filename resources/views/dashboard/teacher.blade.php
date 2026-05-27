@@ -164,8 +164,8 @@
                 <p>Welcome, {{ $user->name }}!</p>
             </div>
             <div class="header-right">
-                <a href="{{ route('activity-logs.index') }}" class="nav-btn">Activity Log</a>
-                <a href="{{ route('logout') }}" class="logout-btn">Logout</a>
+                <a href="{{ route('activity-logs.index', [], false) }}" class="nav-btn">Activity Log</a>
+                <a href="{{ route('logout', [], false) }}" class="logout-btn">Logout</a>
             </div>
         </div>
 
