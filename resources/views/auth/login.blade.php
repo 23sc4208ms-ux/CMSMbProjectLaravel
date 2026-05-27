@@ -146,8 +146,23 @@
         <h1>Login</h1>
         <div class="message">Please login first</div>
 
-        <div id="errorContainer"></div>
-        <div id="countdownContainer"></div>
+        <div id="errorContainer">
+            @if (session('error'))
+                <div class="error-message">{{ session('error') }}</div>
+            @endif
+            @if ($errors->any())
+                <div class="error-message">{{ $errors->first() }}</div>
+            @endif
+        </div>
+        <div id="countdownContainer">
+            @if (session('locked'))
+                <div class="countdown-timer">
+                    <div class="timer-label">Account Locked - Time Remaining:</div>
+                    <div class="timer-display">{{ session('remaining_seconds', 0) }}</div>
+                    <div class="timer-unit">seconds</div>
+                </div>
+            @endif
+        </div>
 
         <form id="loginForm" method="POST" action="{{ route('login.submit') }}">
             @csrf
@@ -182,88 +197,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('loginForm');
-            const loginBtn = document.getElementById('loginBtn');
-            const errorContainer = document.getElementById('errorContainer');
-            const countdownContainer = document.getElementById('countdownContainer');
-
-            let lockoutInterval = null;
-
-            function showLockoutCountdown(seconds) {
-                let remaining = seconds;
-
-                errorContainer.innerHTML = '<div class="error-message">Account locked due to too many failed login attempts</div>';
-                countdownContainer.innerHTML =
-                    '<div class="countdown-timer">' +
-                    '<div class="timer-label">Account Locked - Time Remaining:</div>' +
-                    '<div class="timer-display" id="countdown">' + remaining + '</div>' +
-                    '<div class="timer-unit">seconds</div>' +
-                    '</div>';
-
-                document.getElementById('username').disabled = true;
-                document.getElementById('password').disabled = true;
-                loginBtn.disabled = true;
-
-                lockoutInterval = setInterval(function () {
-                    remaining--;
-                    const countdown = document.getElementById('countdown');
-                    if (countdown) countdown.textContent = remaining;
-
-                    if (remaining <= 0) {
-                        clearInterval(lockoutInterval);
-                        document.getElementById('username').disabled = false;
-                        document.getElementById('password').disabled = false;
-                        loginBtn.disabled = false;
-
-                        countdownContainer.innerHTML =
-                            '<div style="padding: 15px; background: #d4edda; border: 2px solid #4caf50; border-radius: 8px; color: #155724; text-align: center; margin-bottom: 20px;">Account Unlocked! You can try again.</div>';
-                    }
-                }, 1000);
-            }
-
-            form.addEventListener('submit', async function (e) {
-                e.preventDefault();
-
-                errorContainer.innerHTML = '';
-                loginBtn.disabled = true;
-                loginBtn.textContent = 'Logging in...';
-
-                try {
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'Accept': 'application/json',
-                        },
-                        body: new FormData(form),
-                    });
-
-                    const data = await response.json().catch(() => ({}));
-
-                    if (response.ok && data.redirect_url) {
-                        window.location.href = data.redirect_url;
-                        return;
-                    }
-
-                    if (data.locked) {
-                        showLockoutCountdown(data.remaining_seconds || 60);
-                    } else {
-                        errorContainer.innerHTML = '<div class="error-message">' + (data.message || 'Login failed.') + '</div>';
-                    }
-                } catch (error) {
-                    errorContainer.innerHTML = '<div class="error-message">Network error. Please try again.</div>';
-                } finally {
-                    loginBtn.disabled = false;
-                    loginBtn.textContent = 'Login';
-                }
-            });
-
-            @if (session('locked'))
-                showLockoutCountdown({{ session('remaining_seconds', 0) }});
-            @endif
-        });
-    </script>
+    <!-- Plain HTML form submission is intentional here so Render/login issues are visible as normal POST requests. -->
 </body>
 </html>
