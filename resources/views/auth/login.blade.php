@@ -144,6 +144,7 @@
 <body>
     <div class="container">
         <h1>Login</h1>
+        <div class="message">Please login first</div>
 
         <div id="errorContainer">
             @if (session('error'))
@@ -174,6 +175,7 @@
                     name="username"
                     placeholder="Enter your username or email"
                     autocomplete="off"
+                    value=""
                     required
                 >
             </div>
@@ -185,7 +187,8 @@
                     id="password"
                     name="password"
                     placeholder="Enter your password"
-                    autocomplete="off"
+                    autocomplete="new-password"
+                    value=""
                     required
                 >
             </div>
@@ -199,5 +202,13 @@
     </div>
 
     <!-- Plain HTML form submission is intentional here so Render/login issues are visible as normal POST requests. -->
+
+    <script>
+        // Clear form fields on page load to prevent browser auto-fill
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        });
+    </script>
 </body>
 </html>
