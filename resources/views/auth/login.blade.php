@@ -12,7 +12,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ADD8E6 0%, #87CEEB 100%);
             color: #333;
         }
         .container {
@@ -26,17 +26,17 @@
         h1 {
             text-align: center;
             margin-bottom: 30px;
-            color: #667eea;
+            color: #6BB6D6;
             font-size: 24px;
         }
         .message {
             text-align: center;
             padding: 20px;
-            background: #f0f4ff;
-            border: 2px solid #667eea;
+            background: #E0F6FF;
+            border: 2px solid #6BB6D6;
             border-radius: 8px;
             margin-bottom: 30px;
-            color: #667eea;
+            color: #4A90A4;
             font-weight: 500;
             font-size: 16px;
         }
@@ -97,7 +97,7 @@
         }
         input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #6BB6D6;
         }
         input:disabled {
             background-color: #f5f5f5;
@@ -107,7 +107,7 @@
         button {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ADD8E6 0%, #6BB6D6 100%);
             color: white;
             border: none;
             border-radius: 8px;
@@ -118,7 +118,7 @@
         }
         button:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 20px rgba(107, 182, 214, 0.3);
         }
         button:disabled {
             background: linear-gradient(135deg, #999 0%, #666 100%);
@@ -132,7 +132,7 @@
             font-size: 13px;
         }
         .footer a {
-            color: #667eea;
+            color: #6BB6D6;
             text-decoration: none;
             font-weight: 600;
         }

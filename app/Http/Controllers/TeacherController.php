@@ -87,7 +87,7 @@ class TeacherController extends Controller
         try {
             // First, clear teacher references from students
             \App\Models\Student::where('teacher_id', $user->id)->update(['teacher_id' => null]);
-            
+
             // Then delete the user
             $user->delete();
 
