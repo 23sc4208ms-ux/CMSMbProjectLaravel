@@ -84,9 +84,17 @@ class TeacherController extends Controller
             return redirect()->route('teacher.index')->with('error', 'Invalid teacher.');
         }
 
-        $user->forceDelete();
+        try {
+            // First, clear teacher references from students
+            \App\Models\Student::where('teacher_id', $user->id)->update(['teacher_id' => null]);
+            
+            // Then delete the user
+            $user->delete();
 
-        return redirect()->route('teacher.index')->with('success', 'Teacher deleted successfully!');
+            return redirect()->route('teacher.index')->with('success', 'Teacher deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('teacher.index')->with('error', 'Error deleting teacher: ' . $e->getMessage());
+        }
     }
 
     // Show annotation form for a teacher
