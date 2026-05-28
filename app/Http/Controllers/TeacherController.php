@@ -37,14 +37,14 @@ class TeacherController extends Controller
 
         User::create($validated);
 
-        return redirect()->route('login')->with('success', 'Teacher created successfully! They can now login.');
+        return redirect()->route('teacher.index')->with('success', 'Teacher created successfully! They can now login.');
     }
 
     // Show teacher details
     public function show(User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('login');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
         }
 
         return view('teacher.show', ['teacher' => $user]);
@@ -54,7 +54,7 @@ class TeacherController extends Controller
     public function edit(User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('login');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
         }
 
         return view('teacher.edit', ['teacher' => $user]);
@@ -64,7 +64,7 @@ class TeacherController extends Controller
     public function update(Request $request, User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('login');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
         }
 
         $validated = $request->validate([
@@ -74,26 +74,26 @@ class TeacherController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route('login')->with('success', 'Teacher updated successfully!');
+        return redirect()->route('teacher.index')->with('success', 'Teacher updated successfully!');
     }
 
     // Delete teacher
     public function destroy(User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('login');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
         }
 
         $user->forceDelete();
 
-        return redirect()->route('login')->with('success', 'Teacher deleted successfully!');
+        return redirect()->route('teacher.index')->with('success', 'Teacher deleted successfully!');
     }
 
     // Show annotation form for a teacher
     public function annotate(User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('login');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
         }
 
         return view('teacher.annotate', ['teacher' => $user]);
@@ -103,7 +103,7 @@ class TeacherController extends Controller
     public function storeAnnotation(Request $request, User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('login');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
         }
 
         $validated = $request->validate([
@@ -116,6 +116,6 @@ class TeacherController extends Controller
             'annotation' => $validated['annotation'],
         ]);
 
-        return redirect()->route('teachers.show', $user->id)->with('success', 'Note added successfully!');
+        return redirect()->route('teacher.show', $user->id)->with('success', 'Note added successfully!');
     }
 }
