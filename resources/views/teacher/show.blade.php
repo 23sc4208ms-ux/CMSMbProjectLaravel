@@ -201,7 +201,6 @@
             </div>
 
             <div class="button-group">
-                <a href="{{ route('teacher.edit', [$teacher->id], false) }}" class="edit-btn">✏️ Edit</a>
                 <a href="{{ route('teacher.annotate', [$teacher->id], false) }}" class="note-btn">📝 Add Note</a>
                 <a href="{{ route('teacher.index', [], false) }}" class="back-btn">← Back to List</a>
             </div>
