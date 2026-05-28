@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ADD8E6 0%, #87CEEB 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -65,7 +65,7 @@
 
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #6BB6D6;
             box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
         }
 
@@ -86,13 +86,13 @@
         }
 
         .btn-primary {
-            background: #667eea;
+            background: #6BB6D6;
             color: white;
             flex: 1;
         }
 
         .btn-primary:hover {
-            background: #764ba2;
+            background: #87CEEB;
         }
 
         .btn-secondary {

@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ADD8E6 0%, #87CEEB 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -68,7 +68,7 @@
 
         .nav-btn {
             padding: 10px 20px;
-            background: #667eea;
+            background: #6BB6D6;
             color: white;
             text-decoration: none;
             font-weight: 600;
@@ -78,7 +78,7 @@
         }
 
         .nav-btn:hover {
-            background: #764ba2;
+            background: #87CEEB;
         }
 
         .welcome-card {
@@ -119,7 +119,7 @@
         }
 
         .section-card h3 {
-            color: #667eea;
+            color: #6BB6D6;
             margin-bottom: 10px;
             font-size: 18px;
         }
