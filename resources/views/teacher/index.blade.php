@@ -168,7 +168,7 @@
                                     <div class="action-buttons">
                                         <a href="{{ route('teacher.show', $teacher->id) }}" class="view-btn">View</a>
                                         <a href="{{ route('teacher.edit', $teacher->id) }}" class="edit-btn">Edit</a>
-                                        <form method="POST" action="{{ route('teacher.destroy', [$teacher->id], false) }}" style="display: inline;">
+                                        <form method="POST" action="{{ route('teacher.destroy', $teacher->id) }}" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="delete-btn" onclick="return confirm('Are you sure?')">Delete</button>

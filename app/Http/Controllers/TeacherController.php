@@ -44,7 +44,7 @@ class TeacherController extends Controller
     public function show(User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher.');
         }
 
         return view('teacher.show', ['teacher' => $user]);
@@ -54,7 +54,7 @@ class TeacherController extends Controller
     public function edit(User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher.');
         }
 
         return view('teacher.edit', ['teacher' => $user]);
@@ -64,7 +64,7 @@ class TeacherController extends Controller
     public function update(Request $request, User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher.');
         }
 
         $validated = $request->validate([
@@ -81,7 +81,7 @@ class TeacherController extends Controller
     public function destroy(User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher.');
         }
 
         $user->forceDelete();
@@ -93,7 +93,7 @@ class TeacherController extends Controller
     public function annotate(User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher.');
         }
 
         return view('teacher.annotate', ['teacher' => $user]);
@@ -103,7 +103,7 @@ class TeacherController extends Controller
     public function storeAnnotation(Request $request, User $user)
     {
         if ($user->role !== 'teacher') {
-            return redirect()->route('teacher.index')->with('error', 'Invalid teacher record.');
+            return redirect()->route('teacher.index')->with('error', 'Invalid teacher.');
         }
 
         $validated = $request->validate([
@@ -116,6 +116,6 @@ class TeacherController extends Controller
             'annotation' => $validated['annotation'],
         ]);
 
-        return redirect()->route('teacher.show', $user->id)->with('success', 'Note added successfully!');
+        return redirect()->route('teachers.show', $user->id)->with('success', 'Note added successfully!');
     }
 }
