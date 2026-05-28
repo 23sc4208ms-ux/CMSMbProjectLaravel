@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Trust all proxies for HTTPS support in production
+        $middleware->trustProxies(at: '*');
+        
         $middleware->append(InjectGlobalPromotion::class);
 
             $middleware->alias([
